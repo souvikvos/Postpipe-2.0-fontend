@@ -1,3 +1,28 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-image",
+      "description": "Abstract visualization of data pipelines",
+      "imageUrl": "https://images.unsplash.com/photo-1644325349124-d1756b79dd42?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxhYnN0cmFjdCUyMGRhdGF8ZW58MHx8fHwxNzY2MTM4MzMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract data"
+    },
+    {
+      "id": "feature-forms",
+      "description": "A modern web form interface",
+      "imageUrl": "https://images.unsplash.com/photo-1762340275963-04400d52c393?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxmb3JtJTIwaW50ZXJmYWNlfGVufDB8fHx8MTc2NjIzNzU0Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "form interface"
+    },
+    {
+      "id": "feature-workflows",
+      "description": "A graph of connected nodes representing a workflow",
+      "imageUrl": "https://images.unsplash.com/photo-1542744173-05336fcc7ad4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx3b3JrZmxvdyUyMGdyYXBofGVufDB8fHx8MTc2NjIzNzU0Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "workflow graph"
+    },
+    {
+      "id": "feature-ai",
+      "description": "A brain icon with circuits, representing AI",
+      "imageUrl": "https://images.unsplash.com/photo-1697577418970-95d99b5a55cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlfGVufDB8fHx8MTc2NjE2NTA2OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "artificial intelligence"
+    }
+  ]
 }
