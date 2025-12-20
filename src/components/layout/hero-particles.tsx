@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
+import Link from "next/link"
 
 import { Particles } from "@/components/ui/particles"
 import { Button } from "../ui/button"
-import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { DotFlow } from "@/components/ui/dot-flow"
+import { dotFlowItems } from "@/lib/dot-flow-data"
 
 export function HeroParticles() {
   const { theme, systemTheme } = useTheme()
@@ -14,7 +15,7 @@ export function HeroParticles() {
 
   useEffect(() => {
     const currentTheme = theme === "system" ? systemTheme : theme
-    setColor(currentTheme === "dark" ? "#ffffff" : "#0000ff")
+    setColor(currentTheme === "dark" ? "#ffffff" : "#9D4EDD")
   }, [theme, systemTheme])
 
 
@@ -28,12 +29,8 @@ export function HeroParticles() {
               From static forms to agentic AI-powered workflows, PostPipe Pro is the
               all-in-one platform for modern developers and creators.
             </p>
-            <div className="flex gap-4">
-              <Button asChild size="lg" className="bg-accent hover:bg-accent/90">
-                <Link href="/dashboard/workflows">
-                  Get Started <ArrowRight />
-                </Link>
-              </Button>
+            <div className="flex gap-4 items-center">
+              <DotFlow items={dotFlowItems} />
               <Button asChild size="lg" variant="outline">
                 <Link href="#features">Learn More</Link>
               </Button>
