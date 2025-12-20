@@ -39,7 +39,7 @@ export function AnimatedWords({ text, className }: AnimatedWordsProps) {
         // Staggered rise-up for "Pipe"
         const start = 0.1 * (index - 3);
         const end = 0.5 + 0.1 * (index - 4);
-        const y = useTransform(scrollYProgress, [start, end], [30, 0]);
+        const y = useTransform(scrollYProgress, [start, end], [0, -30]);
         const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
         
         return (
