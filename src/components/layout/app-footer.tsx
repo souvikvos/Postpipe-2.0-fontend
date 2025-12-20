@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Github, Twitter } from "lucide-react";
-import { WordScramble } from "../ui/word-scramble";
+import { AnimatedWords } from "../ui/animated-words";
 
 const footerLinks = {
   product: [
@@ -23,7 +23,7 @@ export function AppFooter() {
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           <div className="col-span-12 mb-8 md:col-span-3">
-             <h3 className="font-headline text-lg font-bold">Experience liftoff</h3>
+             <h3 className="font-headline text-lg font-bold">Build bigger, faster</h3>
           </div>
           <div className="col-span-6 md:col-span-2">
             <h4 className="mb-4 font-semibold text-muted-foreground">Product</h4>
@@ -52,7 +52,7 @@ export function AppFooter() {
         </div>
 
         <div className="mt-16 text-center">
-            <WordScramble text="PostPipe" className="font-headline text-8xl md:text-[12rem] font-bold tracking-tighter" />
+            <AnimatedWords text="Experience the backend pipelines" className="font-headline text-6xl md:text-8xl font-bold tracking-tighter" />
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-8 sm:flex-row">
