@@ -20,19 +20,15 @@ export function Header2() {
 	return (
 		<header
 			className={cn(
-				'sticky top-0 z-50 w-full border-b transition-all ease-out',
-				{
-					'bg-background/95 supports-[backdrop-filter]:bg-background/50 border-border backdrop-blur-lg':
-						scrolled,
-				},
+				'sticky top-0 z-50 w-full transition-all ease-out'
 			)}
 		>
-			<div className="container mx-auto px-4">
-				<nav
-					className={cn(
-						'flex h-16 w-full items-center justify-between transition-all ease-out'
-					)}
-				>
+			<div
+				className={cn(
+					"mx-auto flex h-16 max-w-full items-center justify-between border-b px-4 transition-all ease-out",
+					scrolled && "md:top-4 h-14 max-w-5xl rounded-lg border bg-background/95 shadow-md backdrop-blur-lg supports-[backdrop-filter]:bg-background/50"
+				)}
+			>
 					<Link href="/" className="flex items-center gap-2">
 						<Logo className="size-6 text-primary" />
 						<span className="font-bold font-headline">PostPipe Pro</span>
@@ -45,8 +41,6 @@ export function Header2() {
 						))}
 						<AuthButton />
 					</div>
-					{/* Mobile menu can be added here if needed */}
-				</nav>
 			</div>
 		</header>
 	);
