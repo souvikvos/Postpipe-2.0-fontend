@@ -2,55 +2,10 @@ import Link from "next/link";
 import { Github, Twitter } from "lucide-react";
 import { AnimatedWords } from "../ui/animated-words";
 
-const footerLinks = {
-  product: [
-    { href: "#", label: "Features" },
-    { href: "#", label: "Pricing" },
-    { href: "#", label: "Integrations" },
-    { href: "#", label: "Changelog" },
-  ],
-  resources: [
-    { href: "#", label: "Docs" },
-    { href: "#", label: "Blog" },
-    { href: "#", label: "Community" },
-    { href: "#", label: "Contact" },
-  ],
-};
-
 export function AppFooter() {
   return (
     <footer className="border-t bg-background">
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
-          <div className="col-span-12 mb-8 md:col-span-3">
-             <h3 className="font-headline text-lg font-bold">Build bigger, faster</h3>
-          </div>
-          <div className="col-span-6 md:col-span-2">
-            <h4 className="mb-4 font-semibold text-muted-foreground">Product</h4>
-            <ul className="space-y-2">
-              {footerLinks.product.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="hover:text-primary transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="col-span-6 md:col-span-2">
-            <h4 className="mb-4 font-semibold text-muted-foreground">Resources</h4>
-             <ul className="space-y-2">
-              {footerLinks.resources.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="hover:text-primary transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
         <div className="mt-16 text-center">
             <p className="mb-4 text-sm uppercase tracking-widest text-muted-foreground">Experience the Backend</p>
             <AnimatedWords text="PostPipe" className="font-headline text-6xl md:text-8xl font-bold tracking-tighter" />
