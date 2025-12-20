@@ -13,7 +13,7 @@ interface AnimatedWordsProps {
 export function AnimatedWords({ text, className, stagger = 0.05 }: AnimatedWordsProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: "some" });
-  const words = text.split(" ");
+  const letters = text.split("");
 
   const containerVariants = {
     hidden: {},
@@ -24,7 +24,7 @@ export function AnimatedWords({ text, className, stagger = 0.05 }: AnimatedWords
     },
   };
 
-  const wordVariants = {
+  const letterVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
@@ -32,6 +32,18 @@ export function AnimatedWords({ text, className, stagger = 0.05 }: AnimatedWords
       transition: {
         duration: 0.5,
         ease: "easeOut",
+      },
+    },
+  };
+
+  const pVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: [0.2, 0.65, 0.3, 0.9], // A nice ease-out-back like curve
       },
     },
   };
@@ -45,14 +57,13 @@ export function AnimatedWords({ text, className, stagger = 0.05 }: AnimatedWords
       animate={isInView ? "visible" : "hidden"}
       aria-label={text}
     >
-      {words.map((word, index) => (
+      {letters.map((letter, index) => (
         <motion.span
           key={index}
           className="inline-block"
-          variants={wordVariants}
-          style={{ marginRight: "0.25em" }}
+          variants={letter === 'P' ? pVariants : letterVariants}
         >
-          {word}
+          {letter}
         </motion.span>
       ))}
     </motion.div>

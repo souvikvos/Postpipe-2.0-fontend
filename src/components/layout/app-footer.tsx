@@ -52,7 +52,8 @@ export function AppFooter() {
         </div>
 
         <div className="mt-16 text-center">
-            <AnimatedWords text="Experience the backend pipelines" className="font-headline text-6xl md:text-8xl font-bold tracking-tighter" />
+            <p className="mb-4 text-sm uppercase tracking-widest text-muted-foreground">Experience the Backend</p>
+            <AnimatedWords text="PostPipe" className="font-headline text-6xl md:text-8xl font-bold tracking-tighter" />
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-8 sm:flex-row">
