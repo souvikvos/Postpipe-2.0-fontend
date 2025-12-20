@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-// import { useTheme } from "next-themes"
+import { useTheme } from "next-themes"
 
 import { Particles } from "@/components/ui/particles"
 import { Button } from "../ui/button"
@@ -9,14 +9,13 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 export function HeroParticles() {
-  // const { theme, systemTheme } = useTheme()
+  const { theme, systemTheme } = useTheme()
   const [color, setColor] = useState("#ffffff")
 
   useEffect(() => {
-    // Manually check for dark mode for now.
-    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setColor(isDarkMode ? "#ffffff" : "#9D4EDD")
-  }, [])
+    const currentTheme = theme === "system" ? systemTheme : theme
+    setColor(currentTheme === "dark" ? "#ffffff" : "#0000ff")
+  }, [theme, systemTheme])
 
 
   return (
@@ -41,7 +40,7 @@ export function HeroParticles() {
             </div>
         </div>
       <Particles
-        className="absolute inset-0"
+        className="absolute inset-0 -z-10"
         quantity={200}
         ease={80}
         color={color}
