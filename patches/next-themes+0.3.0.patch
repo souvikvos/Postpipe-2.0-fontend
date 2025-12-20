@@ -1,0 +1,690 @@
+diff --git a/node_modules/next-themes/dist/index.js b/node_modules/next-themes/dist/index.js
+index 99a531a..a793a38 100644
+--- a/node_modules/next-themes/dist/index.js
++++ b/node_modules/next-themes/dist/index.js
+@@ -1,13 +1,11 @@
+ 'use client';
+-"use strict";
+-var __create = Object.create;
+-var __defProp = Object.defineProperty;
+-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+-var __getOwnPropNames = Object.getOwnPropertyNames;
+-var __getProtoOf = Object.getPrototypeOf;
+-var __hasOwnProp = Object.prototype.hasOwnProperty;
+-var __export = (target, all) => {
+-  for (var name in all)
+-    __defProp(target, name, { get: all[name], enumerable: true });
+-};
+-var __copyProps = (to, from, except, desc) => {
+-  if (from && typeof from === "object" || typeof from === "function") {
+-    for (let key of __getOwnPropNames(from))
+-      if (!__hasOwnProp.call(to, key) && key !== except)
+-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+-  }
+-  return to;
+-};
+-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+-  // If the importer is in node compatibility mode or this is not an ESM
+-  // file that has been converted to a CommonJS file using a Babel-
+-  // compatible transform (i.e. "__esModule" has not been set), then set
+-  // "default" to the CommonJS "module.exports" for node compatibility.
+-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+-  mod
+-));
+-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+-
+-// src/index.tsx
+-var src_exports = {};
+-__export(src_exports, {
+-  ThemeProvider: () => ThemeProvider,
+-  useTheme: () => useTheme
+-});
+-module.exports = __toCommonJS(src_exports);
+-var import_react = __toESM(require("react"));
+-var import_react_dom = require("react-dom");
++var e=Object.create;
++var t=Object.defineProperty;
++var r=Object.getOwnPropertyDescriptor;
++var n=Object.getOwnPropertyNames;
++var a=Object.getPrototypeOf,o=Object.prototype.hasOwnProperty;
++var s=(i,l)=>()=>(l||i((l={exports:{}}).exports,l),l.exports);
++var u=(i,l)=>{for(var d in l)t(i,d,{get:l[d],enumerable:!0})},c=(i,l,d,p)=>{if(l&&typeof l=="object"||typeof l=="function")for(let m of n(l))!o.call(i,m)&&m!==d&&t(i,m,{get:()=>l[m],enumerable:!(p=r(l,m))||p.enumerable});return i};
++var h=(i,l,d)=>(d=i!=null?e(a(i)):{},c(l||!i||!i.__esModule?t(d,"default",{value:i,enumerable:!0}):d,i));
++var f=s((D,g)=>{g.exports=require("react")});
++var S={};
++u(S,{ThemeProvider:()=>y,useTheme:()=>_});
++var import_react=h(f());
+ const ThemeContext = (0, import_react.createContext)(void 0);
+ const defaultContext = { setTheme: (_theme) => {
+ }, themes: [] };
+ const useTheme = () => (0, import_react.useContext)(ThemeContext) || defaultContext;
+ const forcedThemes = {
+-  // We use this empty object to keep track of forced themes, if it's not present then we know we're not in a forced theme
+-  __forced__: {}
++  __forced__: {}
+ };
+ const ThemeProvider = (props) => {
+-  const {
+-    forcedTheme,
+-    disableTransitionOnChange = false,
+-    enableSystem = true,
+-    enableColorScheme = true,
+-    storageKey = "theme",
+-    themes = ["light", "dark"],
+-    defaultTheme = enableSystem ? "system" : "light",
+-    attribute = "data-theme",
+-    value,
+-    children,
+-    nonce
+-  } = props;
+-  const [theme, setThemeState] = (0, import_react.useState)(() => getTheme(storageKey, defaultTheme));
++  const { forcedTheme, disableTransitionOnChange = !1, enableSystem = !0, enableColorScheme = !0, storageKey = "theme", themes = ["light", "dark"], defaultTheme = enableSystem ? "system" : "light", attribute = "data-theme", value, children, nonce } = props, [theme, setThemeState] = (0, import_react.useState)(() => getTheme(storageKey, defaultTheme));
+   const [resolvedTheme, setResolvedTheme] = (0, import_react.useState)(() => getTheme(storageKey));
+-  const attrs = !value ? themes : Object.values(value);
+-  const applyTheme = (0, import_react.useCallback)((theme2) => {
++  const attrs = !value ? themes : Object.values(value), applyTheme = (0, import_react.useCallback)((theme2) => {
+     let resolved = theme2;
+-    if (!resolved)
+-      return;
++    if (!resolved)
++      return;
+     if (theme2 === "system" && enableSystem) {
+-      resolved = getSystemTheme();
+-    }
+-    const name = value ? value[resolved] : resolved;
+-    const d = document.documentElement;
+-    const isClass = attribute === "class";
++      resolved = getSystemTheme();
++    }
++    const name = value ? value[resolved] : resolved, d = document.documentElement, isClass = attribute === "class";
+     if (isClass) {
+-      d.classList.remove(...attrs.map((t) => value?.[t] || t));
+-      if (name)
++      d.classList.remove(...attrs.map((i) => value?.[i] || i));
++      if (name)
+         d.classList.add(name);
+     } else {
+-      if (name) {
++      if (name)
+         d.setAttribute(attribute, name);
+-      } else {
++      else
+         d.removeAttribute(attribute);
+-      }
+-    }
++    }
+     if (enableColorScheme) {
+       const colorScheme = themes.includes(resolved) ? resolved : null;
+-      d.style.colorScheme = colorScheme;
+-    }
+-  }, [attribute, attrs, enableColorScheme, enableSystem, themes, value]);
+-  const setTheme = (0, import_react.useCallback)(
+-    (theme2) => {
+-      setThemeState(theme2);
+-      try {
+-        localStorage.setItem(storageKey, theme2);
+-      } catch (e) {
+-      }
+-    },
+-    [storageKey]
+-  );
+-  const handleMediaQuery = (0, import_react.useCallback)(
+-    (e) => {
+-      const systemTheme = getSystemTheme(e);
+-      setResolvedTheme(systemTheme);
+-      if (theme === "system" && enableSystem && !forcedTheme) {
+-        applyTheme("system");
+-      }
+-    },
+-    [theme, enableSystem, forcedTheme, applyTheme]
+-  );
+-  (0, import_react.useEffect)(() => {
+-    const media = window.matchMedia("(prefers-color-scheme: dark)");
+-    media.addEventListener("change", handleMediaQuery);
+-    handleMediaQuery(media);
+-    return () => media.removeEventListener("change", handleMediaQuery);
+-  }, [handleMediaQuery]);
+-  (0, import_react.useEffect)(() => {
++      d.style.colorScheme = colorScheme;
++    }
++  }, [attribute, attrs, enableColorScheme, enableSystem, themes, value]), setTheme = (0, import_react.useCallback)((theme2) => {
++    setThemeState(theme2);
++    try {
++      localStorage.setItem(storageKey, theme2);
++    } catch (e) {
++    }
++  }, [storageKey]), handleMediaQuery = (0, import_react.useCallback)((e) => {
++    const systemTheme = getSystemTheme(e);
++    setResolvedTheme(systemTheme);
++    if (theme === "system" && enableSystem && !forcedTheme)
++      applyTheme("system");
++  }, [theme, enableSystem, forcedTheme, applyTheme]);
++  (0, import_react.useEffect)(() => {
++    const media = window.matchMedia("(prefers-color-scheme: dark)");
++    return media.addEventListener("change", handleMediaQuery), handleMediaQuery(media), () => media.removeEventListener("change", handleMediaQuery);
++  }, [handleMediaQuery]);
++  (0, import_react.useEffect)(() => {
+     const handleStorage = (e) => {
+       if (e.key !== storageKey) {
+         return;
+@@ -124,40 +112,30 @@
+       const theme2 = e.newValue || defaultTheme;
+       setTheme(theme2);
+     };
+-    window.addEventListener("storage", handleStorage);
+-    return () => window.removeEventListener("storage", handleStorage);
++    return window.addEventListener("storage", handleStorage), () => window.removeEventListener("storage", handleStorage);
+   }, [storageKey, defaultTheme, setTheme]);
+-  (0, import_react.useEffect)(() => {
++  (0, import_react.useEffect)(() => {
+     applyTheme(forcedTheme ?? theme);
+   }, [forcedTheme, theme, applyTheme]);
+-  const providerValue = (0, import_react.useMemo)(
+-    () => ({
+-      theme,
+-      setTheme,
+-      forcedTheme,
+-      resolvedTheme: theme === "system" ? resolvedTheme : theme,
+-      themes: enableSystem ? [...themes, "system"] : themes,
+-      systemTheme: enableSystem ? resolvedTheme : void 0
+-    }),
+-    [theme, setTheme, forcedTheme, resolvedTheme, enableSystem, themes]
+-  );
++  const providerValue = (0, import_react.useMemo)(() => ({ theme, setTheme, forcedTheme, resolvedTheme: theme === "system" ? resolvedTheme : theme, themes: enableSystem ? [...themes, "system"] : themes, systemTheme: enableSystem ? resolvedTheme : void 0 }), [theme, setTheme, forcedTheme, resolvedTheme, enableSystem, themes]);
+   return /* @__PURE__ */ import_react.default.createElement(ThemeContext.Provider, { value: providerValue }, /* @__PURE__ */ import_react.default.createElement(
+     ThemeScript,
+-    {
+-      forcedTheme,
+-      disableTransitionOnChange,
+-      enableSystem,
+-      enableColorScheme,
+-      storageKey,
+-      themes,
+-      defaultTheme,
+-      attribute,
+-      value,
+-      children,
+-      nonce
+-    }
++    { forcedTheme, disableTransitionOnChange, enableSystem, enableColorScheme, storageKey, themes, defaultTheme, attribute, value, children, nonce }
+   ), children);
+ };
+ const ThemeScript = (0, import_react.memo)(
+   ({
+     forcedTheme,
+-    storageKey,
+-    attribute,
+-    enableSystem,
+-    enableColorScheme,
+-    defaultTheme,
+-    themes,
+-    nonce,
+-    value,
+-    disableTransitionOnChange
++    storageKey,
++    attribute,
++    enableSystem,
++    enableColorScheme,
++    defaultTheme,
++    themes,
++    nonce,
++    value,
++    disableTransitionOnChange
+   }) => {
+     const [isHydrated, setIsHydrated] = (0, import_react.useState)(false);
+-    (0, import_react.useEffect)(() => {
+-      (0, import_react_dom.flushSync)(() => {
+-        setIsHydrated(true);
+-      });
+-    }, []);
++    (0, import_react.useEffect)(() => (setIsHydrated(!0), () => {
++    }), []);
+     const script = (() => {
+       if (forcedTheme) {
+-        if (forcedThemes[forcedTheme])
+-          return `!function(){${forcedThemes[forcedTheme]}}()`;
+-        return `!function(){try{const d=document.documentElement,a="${attribute}",m="${forcedTheme}";if("class"===a)d.classList.add(m);else d.setAttribute(a,m)}catch(e){}}()`;
+-      }
+-      if (enableSystem) {
+-        return `!function(){try{const d=document.documentElement,c=d.classList,a="${attribute}",s="${storageKey}",m=window.matchMedia,o=localStorage.getItem(s);if("system"===o||!o&&${defaultTheme==='system'}){const t=m("(prefers-color-scheme:dark)").matches?"dark":"light";if("class"===a)c.remove(${themes.map((t) => `'${t}'`).join()}),c.add(t);else d.setAttribute(a,t)}else if(o){if("class"===a)c.remove(${themes.map((t) => `'${t}'`).join()}),c.add(o);else d.setAttribute(a,o)}}catch(e){}}()`;
+-      }
+-      return `!function(){try{const d=document.documentElement,c=d.classList,a="${attribute}",s="${storageKey}",o=localStorage.getItem(s);if(o){if("class"===a)c.remove(${themes.map((t) => `'${t}'`).join()}),c.add(o);else d.setAttribute(a,o)}}catch(e){}}()`;
++        return forcedThemes[forcedTheme] ? `!function(){${forcedThemes[forcedTheme]}}()` : `!function(){try{const d=document.documentElement,a="${attribute}",m="${forcedTheme}";"class"===a?d.classList.add(m):d.setAttribute(a,m)}catch(e){}}()`;
++      }
++      return enableSystem ? `!function(){try{const d=document.documentElement,c=d.classList,a="${attribute}",s="${storageKey}",m=window.matchMedia,o=localStorage.getItem(s);if("system"===o||!o&&${defaultTheme === "system"}){const i=m("(prefers-color-scheme:dark)").matches?"dark":"light";"class"===a?(c.remove(${themes.map((i) => `'${i}'`).join()}),c.add(i)):d.setAttribute(a,i)}else if(o){if("class"===a)c.remove(${themes.map((i) => `'${i}'`).join()}),c.add(o);else d.setAttribute(a,o)}}catch(e){}}()` : `!function(){try{const d=document.documentElement,c=d.classList,a="${attribute}",s="${storageKey}",o=localStorage.getItem(s);if(o){if("class"===a)c.remove(${themes.map((i) => `'${i}'`).join()}),c.add(o);else d.setAttribute(a,o)}}catch(e){}}()`;
+     })();
+     const css = (() => {
+       if (forcedTheme) {
+-        if (enableColorScheme) {
+-          return `html{color-scheme:${forcedTheme}}`;
+-        }
+-        return;
+-      }
+-      if (enableSystem) {
+-        return `html{color-scheme:light}html.dark{color-scheme:dark}`;
+-      }
++        if (enableColorScheme)
++          return `html{color-scheme:${forcedTheme}}`;
++        return;
++      }
++      return enableSystem ? "html{color-scheme:light}html.dark{color-scheme:dark}" : void 0;
+     })();
+-    const attrs = !value ? themes : Object.values(value);
+-    return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("script", { nonce, dangerouslySetInnerHTML: { __html: script } }), css && /* @__PURE__ */ import_react.default.createElement(
+-      "style",
+-      {
+-        nonce,
+-        dangerouslySetInnerHTML: {
+-          __html: isHydrated ? "" : `
+${css}
+${disableTransitionOnChange ? "" : `* { -webkit-transition: none !important; -moz-transition: none !important; -o-transition: none !important; -ms-transition: none !important; transition: none !important; }
+`}
+`
+-        }
+-      }
++    const attrs = !value ? themes : Object.values(value);
++    return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("script", { nonce, dangerouslySetInnerHTML: { __html: script } }), css && /* @__PURE__ */ import_react.default.createElement("style", { nonce, dangerouslySetInnerHTML: { __html: isHydrated ? "" : `
+${css}
+${disableTransitionOnChange ? "" : "* { -webkit-transition: none !important; -moz-transition: none !important; -o-transition: none !important; -ms-transition: none !important; transition: none !important; }"}
+` } }
+     ));
+   },
+-  (prevProps, nextProps) => {
+-    if (prevProps.forcedTheme !== nextProps.forcedTheme)
+-      return false;
+-    if (prevProps.storageKey !== nextProps.storageKey)
+-      return false;
+-    if (prevProps.attribute !== nextProps.attribute)
+-      return false;
+-    if (prevProps.enableSystem !== nextProps.enableSystem)
+-      return false;
+-    if (prevProps.enableColorScheme !== nextProps.enableColorScheme)
+-      return false;
+-    if (prevProps.defaultTheme !== nextProps.defaultTheme)
+-      return false;
+-    if (prevProps.themes?.join(",") !== nextProps.themes?.join(","))
+-      return false;
+-    if (prevProps.nonce !== nextProps.nonce)
+-      return false;
+-    if (prevProps.value !== nextProps.value)
+-      return false;
+-    return true;
+-  }
++  (prevProps, nextProps) => (prevProps.forcedTheme === nextProps.forcedTheme && prevProps.storageKey === nextProps.storageKey && prevProps.attribute === nextProps.attribute && prevProps.enableSystem === nextProps.enableSystem && prevProps.enableColorScheme === nextProps.enableColorScheme && prevProps.defaultTheme === nextProps.defaultTheme && (prevProps.themes?.join(",") === nextProps.themes?.join(",")) && prevProps.nonce === nextProps.nonce && prevProps.value === nextProps.value)
+ );
+ const getTheme = (key, fallback) => {
+   if (typeof window === "undefined")
+     return void 0;
+-  let theme;
+-  try {
+-    theme = localStorage.getItem(key) || void 0;
+-  } catch (e) {
+-  }
+-  return theme || fallback;
++  let theme;
++  try {
++    theme = localStorage.getItem(key) || void 0;
++  } catch (e) {
++  }
++  return theme || fallback;
+ };
+ const getSystemTheme = (e) => {
+   if (!e)
+-    e = window.matchMedia("(prefers-color-scheme: dark)");
++    e = window.matchMedia("(prefers-color-scheme: dark)");
+   const isDark = e.matches;
+   const systemTheme = isDark ? "dark" : "light";
+   return systemTheme;
+ };
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  ThemeProvider,
+  useTheme
+});
+diff --git a/node_modules/next-themes/dist/index.mjs b/node_modules/next-themes/dist/index.mjs
+index 451f506..bd5a6f2 100644
+--- a/node_modules/next-themes/dist/index.mjs
++++ b/node_modules/next-themes/dist/index.mjs
+@@ -1,6 +1,5 @@
+ 'use client';
+-import { default as default2, createContext, useContext, useCallback, useEffect, useMemo, memo, useState } from "react";
+-import { flushSync } from "react-dom";
++import { default as default2, createContext, useContext, useCallback, useEffect, useMemo, memo, useState, flushSync } from "react";
+ const ThemeContext = createContext(void 0);
+ const defaultContext = {
+   setTheme: (_theme) => {
+@@ -15,58 +14,58 @@
+ const ThemeProvider = (props) => {
+   const {
+     forcedTheme,
+-    disableTransitionOnChange = false,
+-    enableSystem = true,
+-    enableColorScheme = true,
++    disableTransitionOnChange = !1,
++    enableSystem = !0,
++    enableColorScheme = !0,
+     storageKey = "theme",
+     themes = ["light", "dark"],
+-    defaultTheme = enableSystem ? "system" : "light",
++    defaultTheme = enableSystem ? "system" : "light",
+     attribute = "data-theme",
+     value,
+     children,
+     nonce
+   } = props;
+-  const [theme, setThemeState] = useState(() => getTheme(storageKey, defaultTheme));
++  const [theme, setThemeState] = useState(() => getTheme(storageKey, defaultTheme));
+   const [resolvedTheme, setResolvedTheme] = useState(() => getTheme(storageKey));
+-  const attrs = !value ? themes : Object.values(value);
+-  const applyTheme = useCallback((theme2) => {
++  const attrs = !value ? themes : Object.values(value);
++  const applyTheme = useCallback((theme2) => {
+     let resolved = theme2;
+-    if (!resolved)
+-      return;
++    if (!resolved)
++      return;
+     if (theme2 === "system" && enableSystem) {
+-      resolved = getSystemTheme();
+-    }
+-    const name = value ? value[resolved] : resolved;
+-    const d = document.documentElement;
+-    const isClass = attribute === "class";
++      resolved = getSystemTheme();
++    }
++    const name = value ? value[resolved] : resolved;
++    const d = document.documentElement;
++    const isClass = attribute === "class";
+     if (isClass) {
+-      d.classList.remove(...attrs.map((t) => value?.[t] || t));
+-      if (name)
++      d.classList.remove(...attrs.map((t) => value?.[t] || t));
++      if (name)
+         d.classList.add(name);
+     } else {
+-      if (name) {
++      if (name) {
+         d.setAttribute(attribute, name);
+       } else {
+         d.removeAttribute(attribute);
+       }
+     }
+     if (enableColorScheme) {
+       const colorScheme = themes.includes(resolved) ? resolved : null;
+-      d.style.colorScheme = colorScheme;
+-    }
+-  }, [attribute, attrs, enableColorScheme, enableSystem, themes, value]);
+-  const setTheme = useCallback(
+-    (theme2) => {
+-      setThemeState(theme2);
+-      try {
+-        localStorage.setItem(storageKey, theme2);
+-      } catch (e) {
+-      }
+-    },
+-    [storageKey]
+-  );
+-  const handleMediaQuery = useCallback(
+-    (e) => {
+-      const systemTheme = getSystemTheme(e);
+-      setResolvedTheme(systemTheme);
+-      if (theme === "system" && enableSystem && !forcedTheme) {
+-        applyTheme("system");
+-      }
+-    },
+-    [theme, enableSystem, forcedTheme, applyTheme]
+-  );
+-  useEffect(() => {
+-    const media = window.matchMedia("(prefers-color-scheme: dark)");
+-    media.addEventListener("change", handleMediaQuery);
+-    handleMediaQuery(media);
+-    return () => media.removeEventListener("change", handleMediaQuery);
+-  }, [handleMediaQuery]);
+-  useEffect(() => {
++      d.style.colorScheme = colorScheme;
++    }
++  }, [attribute, attrs, enableColorScheme, enableSystem, themes, value]);
++  const setTheme = useCallback(
++    (theme2) => {
++      setThemeState(theme2);
++      try {
++        localStorage.setItem(storageKey, theme2);
++      } catch (e) {
++      }
++    },
++    [storageKey]
++  );
++  const handleMediaQuery = useCallback(
++    (e) => {
++      const systemTheme = getSystemTheme(e);
++      setResolvedTheme(systemTheme);
++      if (theme === "system" && enableSystem && !forcedTheme) {
++        applyTheme("system");
++      }
++    },
++    [theme, enableSystem, forcedTheme, applyTheme]
++  );
++  useEffect(() => {
++    const media = window.matchMedia("(prefers-color-scheme: dark)");
++    media.addEventListener("change", handleMediaQuery);
++    handleMediaQuery(media);
++    return () => media.removeEventListener("change", handleMediaQuery);
++  }, [handleMediaQuery]);
++  useEffect(() => {
+     const handleStorage = (e) => {
+       if (e.key !== storageKey) {
+         return;
+@@ -75,39 +74,39 @@
+       setTheme(theme2);
+     };
+     window.addEventListener("storage", handleStorage);
+     return () => window.removeEventListener("storage", handleStorage);
+   }, [storageKey, defaultTheme, setTheme]);
+-  useEffect(() => {
++  useEffect(() => {
+     applyTheme(forcedTheme ?? theme);
+   }, [forcedTheme, theme, applyTheme]);
+-  const providerValue = useMemo(
+-    () => ({
+-      theme,
+-      setTheme,
+-      forcedTheme,
+-      resolvedTheme: theme === "system" ? resolvedTheme : theme,
+-      themes: enableSystem ? [...themes, "system"] : themes,
+-      systemTheme: enableSystem ? resolvedTheme : void 0
+-    }),
+-    [theme, setTheme, forcedTheme, resolvedTheme, enableSystem, themes]
+-  );
++  const providerValue = useMemo(
++    () => ({
++      theme,
++      setTheme,
++      forcedTheme,
++      resolvedTheme: theme === "system" ? resolvedTheme : theme,
++      themes: enableSystem ? [...themes, "system"] : themes,
++      systemTheme: enableSystem ? resolvedTheme : void 0
++    }),
++    [theme, setTheme, forcedTheme, resolvedTheme, enableSystem, themes]
++  );
+   return /* @__PURE__ */ default2.createElement(ThemeContext.Provider, { value: providerValue }, /* @__PURE__ */ default2.createElement(
+     ThemeScript,
+-    {
+-      forcedTheme,
+-      disableTransitionOnChange,
+-      enableSystem,
+-      enableColorScheme,
+-      storageKey,
+-      themes,
+-      defaultTheme,
+-      attribute,
+-      value,
+-      children,
+-      nonce
+-    }
++    {
++      forcedTheme,
++      disableTransitionOnChange,
++      enableSystem,
++      enableColorScheme,
++      storageKey,
++      themes,
++      defaultTheme,
++      attribute,
++      value,
++      children,
++      nonce
++    }
+   ), children);
+ };
+ const ThemeScript = memo(
+   ({
+     forcedTheme,
+@@ -121,57 +120,57 @@
+     value,
+     disableTransitionOnChange
+   }) => {
+-    const [isHydrated, setIsHydrated] = useState(false);
+-    useEffect(() => {
+-      flushSync(() => {
+-        setIsHydrated(true);
+-      });
+-    }, []);
++    const [isHydrated, setIsHydrated] = useState(false);
++    useEffect(() => {
++      setIsHydrated(true);
++    }, []);
+     const script = (() => {
+       if (forcedTheme) {
+-        if (forcedThemes[forcedTheme])
+-          return `!function(){${forcedThemes[forcedTheme]}}()`;
+-        return `!function(){try{const d=document.documentElement,a="${attribute}",m="${forcedTheme}";if("class"===a)d.classList.add(m);else d.setAttribute(a,m)}catch(e){}}()`;
+-      }
+-      if (enableSystem) {
+-        return `!function(){try{const d=document.documentElement,c=d.classList,a="${attribute}",s="${storageKey}",m=window.matchMedia,o=localStorage.getItem(s);if("system"===o||!o&&${defaultTheme === "system"}){const t=m("(prefers-color-scheme:dark)").matches?"dark":"light";if("class"===a)c.remove(${themes.map((t) => `'${t}'`).join()}),c.add(t);else d.setAttribute(a,t)}else if(o){if("class"===a)c.remove(${themes.map((t) => `'${t}'`).join()}),c.add(o);else d.setAttribute(a,o)}}catch(e){}}()`;
+-      }
+-      return `!function(){try{const d=document.documentElement,c=d.classList,a="${attribute}",s="${storageKey}",o=localStorage.getItem(s);if(o){if("class"===a)c.remove(${themes.map((t) => `'${t}'`).join()}),c.add(o);else d.setAttribute(a,o)}}catch(e){}}()`;
++        if (forcedThemes[forcedTheme])
++          return `!function(){${forcedThemes[forcedTheme]}}()`;
++        return `!function(){try{const d=document.documentElement,a="${attribute}",m="${forcedTheme}";"class"===a?d.classList.add(m):d.setAttribute(a,m)}catch(e){}}()`;
++      }
++      if (enableSystem) {
++        return `!function(){try{const d=document.documentElement,c=d.classList,a="${attribute}",s="${storageKey}",m=window.matchMedia,o=localStorage.getItem(s);if("system"===o||!o&&${defaultTheme === "system"}){const t=m("(prefers-color-scheme:dark)").matches?"dark":"light";"class"===a?(c.remove(${themes.map((t) => `'${t}'`).join()}),c.add(t)):d.setAttribute(a,t)}else if(o){"class"===a?(c.remove(${themes.map((t) => `'${t}'`).join()}),c.add(o)):d.setAttribute(a,o)}}catch(e){}}()`;
++      }
++      return `!function(){try{const d=document.documentElement,c=d.classList,a="${attribute}",s="${storageKey}",o=localStorage.getItem(s);if(o){"class"===a?(c.remove(${themes.map((t) => `'${t}'`).join()}),c.add(o)):d.setAttribute(a,o)}}catch(e){}}()`;
+     })();
+     const css = (() => {
+       if (forcedTheme) {
+-        if (enableColorScheme) {
+-          return `html{color-scheme:${forcedTheme}}`;
+-        }
+-        return;
+-      }
+-      if (enableSystem) {
+-        return `html{color-scheme:light}html.dark{color-scheme:dark}`;
+-      }
++        if (enableColorScheme) {
++          return `html{color-scheme:${forcedTheme}}`;
++        }
++        return;
++      }
++      if (enableSystem) {
++        return `html{color-scheme:light}html.dark{color-scheme:dark}`;
++      }
+     })();
+-    const attrs = !value ? themes : Object.values(value);
+-    return /* @__PURE__ */ default2.createElement(default2.Fragment, null, /* @__PURE__ */ default2.createElement("script", { nonce, dangerouslySetInnerHTML: { __html: script } }), css && /* @__PURE__ */ default2.createElement(
+-      "style",
+-      {
+-        nonce,
+-        dangerouslySetInnerHTML: {
+-          __html: isHydrated ? "" : `
+-${css}
+-${disableTransitionOnChange ? "" : `* { -webkit-transition: none !important; -moz-transition: none !important; -o-transition: none !important; -ms-transition: none !important; transition: none !important; }
+-`}
+-`
+-        }
+-      }
++    const attrs = !value ? themes : Object.values(value);
++    return /* @__PURE__ */ default2.createElement(default2.Fragment, null, /* @__PURE__ */ default2.createElement("script", { nonce, dangerouslySetInnerHTML: { __html: script } }), css && /* @__PURE__ */ default2.createElement(
++      "style",
++      {
++        nonce,
++        dangerouslySetInnerHTML: {
++          __html: isHydrated ? "" : `
++${css}
++${disableTransitionOnChange ? "" : `* { -webkit-transition: none !important; -moz-transition: none !important; -o-transition: none !important; -ms-transition: none !important; transition: none !important; }
++`}
++`
++        }
++      }
+     ));
+   },
+-  (prevProps, nextProps) => {
+-    if (prevProps.forcedTheme !== nextProps.forcedTheme)
+-      return false;
+-    if (prevProps.storageKey !== nextProps.storageKey)
+-      return false;
+-    if (prevProps.attribute !== nextProps.attribute)
+-      return false;
+-    if (prevProps.enableSystem !== nextProps.enableSystem)
+-      return false;
+-    if (prevProps.enableColorScheme !== nextProps.enableColorScheme)
+-      return false;
+-    if (prevProps.defaultTheme !== nextProps.defaultTheme)
+-      return false;
+-    if (prevProps.themes?.join(",") !== nextProps.themes?.join(","))
+-      return false;
+-    if (prevProps.nonce !== nextProps.nonce)
+-      return false;
+-    if (prevProps.value !== nextProps.value)
+-      return false;
+-    return true;
+-  }
++  (prevProps, nextProps) => (prevProps.forcedTheme === nextProps.forcedTheme && prevProps.storageKey === nextProps.storageKey && prevProps.attribute === nextProps.attribute && prevProps.enableSystem === nextProps.enableSystem && prevProps.enableColorScheme === nextProps.enableColorScheme && prevProps.defaultTheme === nextProps.defaultTheme && (prevProps.themes?.join(",") === nextProps.themes?.join(",")) && prevProps.nonce === nextProps.nonce && prevProps.value === nextProps.value)
+ );
+ const getTheme = (key, fallback) => {
+-  if (typeof window === "undefined")
+-    return void 0;
+-  let theme;
+-  try {
+-    theme = localStorage.getItem(key) || void 0;
+-  } catch (e) {
+-  }
+-  return theme || fallback;
++  if (typeof window === "undefined")
++    return void 0;
++  let theme;
++  try {
++    theme = localStorage.getItem(key) || void 0;
++  } catch (e) {
++  }
++  return theme || fallback;
+ };
+ const getSystemTheme = (e) => {
+-  if (!e)
+-    e = window.matchMedia("(prefers-color-scheme: dark)");
++  if (!e)
++    e = window.matchMedia("(prefers-color-scheme: dark)");
+   const isDark = e.matches;
+   const systemTheme = isDark ? "dark" : "light";
+   return systemTheme;
+ };
+ export {
+   ThemeProvider,
+   useTheme
+ };
+diff --git a/node_modules/next-themes/package.json b/node_modules/next-themes/package.json
+index 5a58578..f91e3f8 100644
+--- a/node_modules/next-themes/package.json
++++ b/node_modules/next-themes/package.json
+@@ -37,8 +37,8 @@
+   },
+   "peerDependencies": {
+     "next": ">=9",
+-    "react": "^16.8 || ^17 || ^18",
+-    "react-dom": "^16.8 || ^17 || ^18"
++    "react": "^16.8 || ^17 || ^18 || ^19",
++    "react-dom": "^16.8 || ^17 || ^18 || ^19"
+   },
+   "dependencies": {},
+   "devDependencies": {

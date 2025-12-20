@@ -13,6 +13,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AppFooter } from '@/components/layout/app-footer';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Header2 } from '@/components/ui/header-2';
+import { Particles } from '@/components/ui/particles';
+import { HeroParticles } from '@/components/layout/hero-particles';
 
 const heroImage = PlaceHolderImages.find((img) => img.id === 'hero-image');
 
@@ -51,39 +53,9 @@ export default function Home() {
       <main className="flex-1">
         <section
           id="hero"
-          className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 py-20 md:grid-cols-2 md:py-32"
+          className="relative"
         >
-          <div className="flex flex-col items-start gap-6">
-            <h1 className="font-headline text-4xl font-bold md:text-6xl lg:text-7xl">
-              Build & Automate with PostPipe Pro
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              From static forms to agentic AI-powered workflows, PostPipe Pro is the
-              all-in-one platform for modern developers and creators.
-            </p>
-            <div className="flex gap-4">
-              <Button asChild size="lg" className="bg-accent hover:bg-accent/90">
-                <Link href="/dashboard/workflows">
-                  Get Started <ArrowRight />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link href="#features">Learn More</Link>
-              </Button>
-            </div>
-          </div>
-          <div className="relative h-64 w-full md:h-auto md:p-8">
-            {heroImage && (
-               <Image
-                  src={heroImage.imageUrl}
-                  alt={heroImage.description}
-                  width={800}
-                  height={600}
-                  className="rounded-xl object-cover shadow-2xl shadow-primary/20"
-                  data-ai-hint={heroImage.imageHint}
-                />
-            )}
-          </div>
+          <HeroParticles />
         </section>
 
         <section id="features" className="bg-background-muted py-20 md:py-32">
