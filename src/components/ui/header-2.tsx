@@ -20,13 +20,14 @@ export function Header2() {
 	return (
 		<header
 			className={cn(
-				'sticky top-0 z-50 w-full transition-all ease-out'
+				'sticky top-0 z-50 w-full transition-all ease-out',
+				scrolled && "md:top-4"
 			)}
 		>
 			<div
 				className={cn(
-					"mx-auto flex h-16 max-w-full items-center justify-between border-b px-4 transition-all duration-300 ease-out sticky top-2 z-50",
-					scrolled && "h-14 max-w-5xl rounded-lg border bg-background/95 shadow-md backdrop-blur-lg supports-[backdrop-filter]:bg-background/50 md:top-4"
+					"mx-auto flex h-16 max-w-full items-center justify-between border-b px-4 transition-all duration-300 ease-out",
+					scrolled && "h-14 max-w-5xl rounded-lg border bg-background/95 shadow-md backdrop-blur-lg supports-[backdrop-filter]:bg-background/50"
 				)}
 			>
 					<Link href="/" className="flex items-center gap-2">
