@@ -16,10 +16,10 @@ export function WordRotate({
   words,
   duration = 2500,
   framerProps = {
-    initial: { opacity: 0, y: -50 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: 50 },
-    transition: { duration: 0.25, ease: "easeOut" },
+    initial: { opacity: 0, rotateX: -90 },
+    animate: { opacity: 1, rotateX: 0 },
+    exit: { opacity: 0, rotateX: 90 },
+    transition: { duration: 0.4, ease: "easeOut" },
   },
   className,
 }: WordRotateProps) {
@@ -35,11 +35,11 @@ export function WordRotate({
   }, [words, duration]);
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden" style={{ perspective: '100px' }}>
       <AnimatePresence mode="wait">
         <motion.span
           key={words[index]}
-          className={cn(className)}
+          className={cn("inline-block", className)}
           {...framerProps}
         >
           {words[index]}

@@ -17,14 +17,14 @@ export function HeroParticles() {
 
   useEffect(() => {
     const currentTheme = theme === "system" ? systemTheme : theme
-    setColor(currentTheme === "dark" ? "#ffffff" : "#436cde")
+    setColor(currentTheme === "dark" ? "#ffffff" : "#006aff")
   }, [theme, systemTheme])
 
 
   return (
     <div className="relative flex h-[70vh] min-h-[500px] w-full flex-col items-center justify-center overflow-hidden">
         <div className="z-10 flex flex-col items-center text-center gap-6 px-4">
-            <MagneticText text="PostPipe" hoverText="2.0" className="font-body text-8xl md:text-9xl lg:text-[10rem] font-black" />
+            <MagneticText text="PostPipe" hoverText="PRO" className="font-body text-8xl md:text-9xl lg:text-[10rem] font-black" />
             <div className="flex text-lg text-muted-foreground max-w-3xl">
               The largest Next.js backend component&nbsp;
               <WordRotate
@@ -42,7 +42,9 @@ export function HeroParticles() {
       <Particles
         className="absolute inset-0 -z-10"
         quantity={280}
-        ease={80}
+        size={0.8}
+        staticity={50}
+        ease={60}
         color={color}
         refresh
       />
