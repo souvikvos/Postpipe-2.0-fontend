@@ -28,7 +28,7 @@ export function AnimatedWords({ text, className }: AnimatedWordsProps) {
         const y = useTransform(
           scrollYProgress,
           [0, 1],
-          letter === 'P' ? [0, -150] : [0, 0]
+          letter === 'P' ? [0, -50] : [0, 0]
         );
         const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
 
