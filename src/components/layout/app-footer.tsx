@@ -1,30 +1,61 @@
 import Link from "next/link";
-import { Github, Twitter } from "lucide-react";
 import { AnimatedWords } from "../ui/animated-words";
+
+const productLinks = [
+    { href: "#", label: "Download" },
+    { href: "#", label: "Product" },
+    { href: "#", label: "Docs" },
+    { href: "#", label: "Changelog" },
+];
+
+const resourceLinks = [
+    { href: "#", label: "Blog" },
+    { href: "#", label: "Pricing" },
+    { href: "#", label: "Use Cases" },
+];
+
 
 export function AppFooter() {
   return (
     <footer className="border-t bg-background">
-      <div className="container mx-auto px-4 py-24">
-        <div className="text-center">
-            <p className="mb-4 text-sm uppercase tracking-widest text-muted-foreground">Experience the Backend</p>
-            <AnimatedWords text="PostPipe" className="font-headline text-8xl md:text-[12rem] lg:text-[15rem] font-bold tracking-tighter leading-none" />
+      <div className="container mx-auto px-4 py-16 md:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 md:mb-24">
+            <div>
+                <h3 className="text-xl md:text-2xl font-medium">Experience the Backend</h3>
+            </div>
+            <div className="grid grid-cols-2 gap-8">
+                <div>
+                    <h4 className="font-medium mb-4">Product</h4>
+                    <ul className="space-y-3">
+                        {productLinks.map((link) => (
+                            <li key={link.label}>
+                                <Link href={link.href} className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {link.label}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div>
+                    <h4 className="font-medium mb-4">Resources</h4>
+                    <ul className="space-y-3">
+                        {resourceLinks.map((link) => (
+                            <li key={link.label}>
+                                <Link href={link.href} className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {link.label}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <div className="mt-24 flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-8 sm:flex-row">
-            <p className="text-sm text-muted-foreground">
-                © {new Date().getFullYear()} PostPipe Inc. All rights reserved.
-            </p>
-            <div className="flex items-center gap-4">
-                <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    <Github className="size-5" />
-                    <span className="sr-only">GitHub</span>
-                </Link>
-                <Link href="#" className="text-muted-foreground hover:text-foreground">
-                    <Twitter className="size-5" />
-                    <span className="sr-only">Twitter</span>
-                </Link>
-            </div>
+        <div className="text-center">
+            <AnimatedWords 
+                text="PostPipe" 
+                className="font-headline text-8xl md:text-[12rem] lg:text-[15rem] font-bold tracking-tighter leading-none" 
+            />
         </div>
       </div>
     </footer>
