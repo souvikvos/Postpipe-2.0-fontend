@@ -28,16 +28,32 @@ export function AnimatedWords({ text, className }: AnimatedWordsProps) {
           // Fade-in for "Post"
           opacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
           y = 0; // No vertical movement
-        } else if (index < 6) { // 'P' and 'i'
-          const start = 0.1 + (index - 4) * 0.1;
+        } else {
+          // Staggered animation for each letter in "Pipe"
+          const start = 0.1 + (index - 4) * 0.08; 
           const end = 0.5 + (index - 4) * 0.1;
-          y = useTransform(scrollYProgress, [start, end], [70, -20]);
-          opacity = useTransform(scrollYProgress, [start, end], [0.9, 1]);
-        } else { // 'p' and 'e' have separate motion
-          const start = 0.2 + (index - 6) * 0.15; // Slightly more delay
-          const end = 0.6 + (index - 6) * 0.15;
-          y = useTransform(scrollYProgress, [start, end], [90, -35]); // Different start/end positions
-          opacity = useTransform(scrollYProgress, [start, end], [0.9, 1]);
+          
+          let yStart, yEnd;
+          
+          switch(index) {
+            case 4: // P
+              yStart = 50; yEnd = -20;
+              break;
+            case 5: // i
+              yStart = 60; yEnd = -40;
+              break;
+            case 6: // p
+              yStart = 40; yEnd = -55;
+              break;
+            case 7: // e
+              yStart = 70; yEnd = -35;
+              break;
+            default:
+              yStart = 0; yEnd = 0;
+          }
+
+          y = useTransform(scrollYProgress, [start, end], [yStart, yEnd]);
+          opacity = useTransform(scrollYProgress, [start, end], [0.5, 1]);
         }
         
         return (
